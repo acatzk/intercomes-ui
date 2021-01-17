@@ -1,12 +1,23 @@
 <template>
   <div class="flex flex-row h-screen">
-    <div class="w-16 bg-gray-200 flex flex-col justify-between items-center p-4">
-      <div class="flex flex-col space-y-3">
-        <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
-        <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
-        <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
-        <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
-        <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+    <div class="bg-gray-100 flex flex-col justify-between items-center">
+      <div>
+        <ul>
+          <li class="px-3 py-4 rounded-br-xl cursor-pointer hover:text-gray-50">
+            <a href="#">
+              <svg class="w-8 h-8 fill-current text-gray-900" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M221.867 140.748a8.534 8.534 0 0 1-17.067 0V64a8.534 8.534 0 0 1 17.067 0v76.748zm-2.978 53.413c-1.319 1.129-32.93 27.655-90.889 27.655-57.958 0-89.568-26.527-90.887-27.656a8.535 8.535 0 0 1-.925-12.033 8.53 8.53 0 0 1 12.013-.942c.501.42 28.729 23.563 79.8 23.563 51.712 0 79.503-23.31 79.778-23.545 3.571-3.067 8.968-2.655 12.033.925a8.534 8.534 0 0 1-.923 12.033zM34.133 64A8.534 8.534 0 0 1 51.2 64v76.748a8.534 8.534 0 0 1-17.067 0V64zm42.668-17.067a8.534 8.534 0 0 1 17.066 0v114.001a8.534 8.534 0 0 1-17.066 0v-114zm42.666-4.318A8.532 8.532 0 0 1 128 34.082a8.532 8.532 0 0 1 8.534 8.533v123.733a8.534 8.534 0 0 1-17.067 0V42.615zm42.667 4.318a8.534 8.534 0 0 1 17.066 0v114.001a8.534 8.534 0 0 1-17.066 0v-114zM224 0H32C14.327 0 0 14.327 0 32v192c0 17.672 14.327 32 32 32h192c17.673 0 32-14.328 32-32V32c0-17.673-14.327-32-32-32z" /></svg>
+            </a>
+          </li>
+          <li v-for="(link, i) in links" 
+              :key="i" 
+              class="px-3 py-3 rounded-tr rounded-br cursor-pointer trnasition ease-in-out duration-150 hover:bg-gray-50"
+              :class="link.id === setlink ? 'bg-gray-50' : ''"
+              @click.prevent="setlink = link.id">
+            <a href="#">
+              <span v-html="link.icon" class="text-gray-700"></span>
+            </a>
+          </li>
+        </ul>
       </div>
       <div class="flex flex-col space-y-3">
         <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
@@ -14,7 +25,7 @@
         <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
       </div>
     </div>
-    <div class="w-64">submenu</div>
+    <div class="w-64 bg-gray-50">submenu</div>
     <div class="flex-grow bg-yellow-200">content</div>
   </div>
 </template>
@@ -23,6 +34,29 @@
   export default {
     head: {
       title: 'Intercom\s Inbox'
+    },
+    data () {
+      return {
+        setlink: '',
+        links: [
+          {
+            id: 'inbox',
+            icon: '<svg class="w-7 h-7 fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461.312 461.312"><path d="M458.24 200.96l-50.688-102.4c-8.704-17.92-26.624-29.184-47.104-29.184H100.352c-20.48 0-37.888 10.752-47.104 29.184L2.56 200.448C1.024 203.52 0 207.104 0 210.176v137.728c0 24.064 19.456 44.032 44.032 44.032H417.28c24.064 0 44.032-19.456 44.032-44.032V210.688c-.512-3.584-1.536-7.168-3.072-9.728zm-138.752-12.288c-10.24 0-18.944 7.168-21.504 17.408-.512 2.048-12.288 56.832-68.096 56.832-54.272 0-66.56-50.688-68.096-56.832-2.048-10.24-10.752-17.408-21.504-17.408H57.344l35.328-70.656c1.536-2.56 4.608-5.12 7.68-5.12h260.096c3.072 0 6.144 1.536 7.68 5.12l34.816 70.656h-83.456z"/></svg>'
+          },
+          {
+            id: 'send',
+            icon: '<svg class="w-6 h-6" enable-background="new 0 0 496.009 496.009" height="512" viewBox="0 0 496.009 496.009" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m475.015.815-464 151.617c-13.104 4.282-14.999 22.106-3.073 29.04l175.35 101.963c5.532 3.217 12.446 2.829 17.582-.986l49.292-36.606-36.606 49.292c-3.814 5.137-4.202 12.052-.986 17.583l101.963 175.35c6.942 11.936 24.762 10.02 29.041-3.073l151.617-464c4.067-12.459-7.782-24.234-20.18-20.18zm-150.766 440.297-78.712-135.365 94.913-127.805c4.729-6.37 4.078-15.243-1.532-20.853-5.609-5.61-14.484-6.262-20.853-1.532l-127.805 94.914-135.364-78.713 400.087-130.733zm-156.258-90.468-106.238 106.237c-6.248 6.247-16.379 6.249-22.627 0-6.249-6.248-6.249-16.379 0-22.627l106.238-106.237c6.25-6.247 16.381-6.249 22.627 0 6.249 6.248 6.249 16.379 0 22.627zm-140.349 4.02c-6.249-6.249-6.249-16.379 0-22.627l41.92-41.921c6.248-6.249 16.379-6.249 22.627 0 6.249 6.249 6.249 16.379 0 22.627l-41.92 41.921c-6.247 6.247-16.379 6.248-22.627 0zm178.25 49.154c6.249 6.248 6.249 16.379 0 22.627l-41.921 41.92c-3.124 3.125-7.219 4.687-11.313 4.687-14.127 0-21.421-17.207-11.313-27.314l41.921-41.92c6.247-6.249 16.378-6.249 22.626 0z"/></svg>'
+          },
+          {
+            id: 'users',
+            icon: '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>'
+          },
+          {
+            id: 'book-open',
+            icon: '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>'
+          }
+        ]
+      }
     }
   }
 </script>
